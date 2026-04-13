@@ -40,9 +40,9 @@ htmlcov/
 # MyPy
 .mypy_cache/
 
-# Model files
-*.pkl
-*.joblib
+# Model files if model too big
+#*.pkl
+#*.joblib
 
 # If datasets where really large (keep test data)
 #data/raw/
