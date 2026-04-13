@@ -62,6 +62,6 @@ def test_predict_proba_shape(tmp_path, sample_data):
     proba = pipeline.predict_proba(X)
 
     # on ne predit que la proba d'appartenir a la classe (a_quitte_lentreprise == true)
-    assert proba.shape == (len(X), 1) 
+    assert proba.shape == (len(X), 2) 
     assert 0.0 <= proba[0][0] <= 1.0
     assert 0.0 <= proba[0][1] <= 1.0
