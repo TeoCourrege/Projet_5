@@ -1,7 +1,9 @@
 import pytest
 import numpy as np
 import joblib
+import pandas as pd
 from src.model.train import train_pipeline
+from src.model.predict import predict_new
 
 
 def test_pipeline_training(tmp_path, sample_data):
@@ -49,3 +51,19 @@ def test_model_persistence(tmp_path, sample_data):
 
     assert list(pipeline.predict(X)) == list(loaded.predict(X))
 
+
+def test_predict_new(tmp_path, sample_data):
+    csv_path = tmp_path / "input.csv"
+    model_path = tmp_path / "model.pkl"
+
+    sample_data.to_csv(csv_path, index=False)
+
+    result = predict_new(
+        csv_path=str(csv_path),
+        model_path=str(model_path)
+    )
+
+    assert isinstance(result, pd.DataFrame)
+    assert "prediction" in result.columns
+    assert "id" in result.columns
+    assert len(result) == len(sample_data)
