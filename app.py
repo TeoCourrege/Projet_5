@@ -10,9 +10,9 @@ from src.db.database import (
 init_db()
 seed_admin()
 
-# ==============================
+# ===============================
 # UI
-# ==============================
+# ===============================
 with gr.Blocks(title="Prédiction départ employé") as demo:
 
     gr.Markdown("# Prédiction départ employé")
