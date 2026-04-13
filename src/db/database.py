@@ -320,7 +320,7 @@ def batch_predict(file):
 
     except Exception as e:
         session.rollback()
-        return f"Erreur: {str(e)}"
+        return pd.DataFrame([{"id": "ERROR", "prediction": "Format non supporté"}])
     finally:
         session.close()
 
