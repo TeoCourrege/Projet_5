@@ -26,7 +26,7 @@ POSTGRES_PORT = os.getenv("POSTGRES_PORT", "5432")
 
 # fallback to SQLite if Postgres is not configured
 if not POSTGRES_HOST:
-    DATABASE_URL = "sqlite:///./app.db"
+    DATABASE_URL = "sqlite:////data/app.db"
     logger.warning("POSTGRES not set → using SQLite fallback")
 else:
     DATABASE_URL = (
@@ -110,8 +110,11 @@ Index("idx_outputs_employee", ModelOutput.employee_id)
 # TABLE CREATION
 # ==============================
 def init_db():
-    Base.metadata.create_all(engine)
-    logger.info("Tables created (if not existing).")
+    try:
+        Base.metadata.create_all(engine)
+        logger.info("Tables created")
+    except Exception as e:
+        logger.error(f"DB init failed: {e}")
 
 
 # ==============================

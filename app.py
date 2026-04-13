@@ -123,4 +123,4 @@ with gr.Blocks(title="Prédiction départ employé") as demo:
 # RUN
 # ==============================
 if __name__ == "__main__":
-    demo.launch(auth=authenticate)
+    demo.launch(auth=authenticate,server_name="0.0.0.0", server_port=7860)
