@@ -21,7 +21,11 @@ with gr.Blocks(title="Prédiction départ employé") as demo:
     with gr.Tab("Prédiction par fichier"):
         file_input = gr.File(label="Upload CSV ou JSON (doit contenir la colonne 'id')")
         batch_btn = gr.Button("Prédire fichier", variant="primary")
-        batch_output = gr.Dataframe(label="Résultats")
+        batch_output = gr.Dataframe(
+            label="Résultats",
+            headers=["id", "prediction"],
+            datatype=["number", "number"],
+            col_count=(2, "fixed"))
 
         batch_btn.click(fn=batch_predict, inputs=file_input, outputs=batch_output)
 
@@ -126,4 +130,4 @@ with gr.Blocks(title="Prédiction départ employé") as demo:
 # RUN
 # ==============================
 if __name__ == "__main__":
-    demo.launch(auth=authenticate, server_name="0.0.0.0", server_port=7860, share=True)
+    demo.launch(auth=authenticate, server_name="0.0.0.0", server_port=7860)
