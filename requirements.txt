@@ -16,7 +16,7 @@ lightgbm>=4.5.0
 # Web & UI
 # ==============================
 gradio==6.10.0
-huggingface_hub==0.24.6
+huggingface_hub==1.8.0#0.24.6
 
 # ==============================
 # Database
