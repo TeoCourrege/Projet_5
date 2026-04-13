@@ -80,7 +80,7 @@ jobs:
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
-          pip install huggingface_hub
-          huggingface-cli login --token $HF_TOKEN
+          pip install -U huggingface_hub
+          hf auth login --token $HF_TOKEN
           git remote add hf https://huggingface.co/spaces/${{ secrets.HF_USERNAME }}/${{ secrets.HF_SPACE_NAME }}.git || true
           git push hf main --force
