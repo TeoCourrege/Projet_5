@@ -41,8 +41,8 @@ htmlcov/
 .mypy_cache/
 
 # Model files if model too big
-#*.pkl
-#*.joblib
+*.pkl
+*.joblib
 
 # If datasets where really large (keep test data)
 #data/raw/
