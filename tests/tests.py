@@ -58,6 +58,11 @@ def test_predict_new(tmp_path, sample_data):
 
     sample_data.to_csv(csv_path, index=False)
 
+    pipeline = train_pipeline(
+        csv_path=str(csv_path),
+        model_path=str(model_path)
+    )
+
     result = predict_new(
         csv_path=str(csv_path),
         model_path=str(model_path)
