@@ -26,13 +26,18 @@ POSTGRES_PORT = os.getenv("POSTGRES_PORT", "5432")
 
 # fallback to SQLite if Postgres is not configured
 if not POSTGRES_HOST:
-    DATABASE_URL = "sqlite:////data/app.db"
+    BASE_DIR = "/data"
+    DB_PATH = os.path.join(BASE_DIR, "app.db")
+    os.makedirs(BASE_DIR, exist_ok=True)
+
+    DATABASE_URL = f"sqlite:///{DB_PATH}"
     logger.warning("POSTGRES not set → using SQLite fallback")
 else:
     DATABASE_URL = (
         f"postgresql+psycopg2://{POSTGRES_USER}:{POSTGRES_PASSWORD}"
         f"@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DB}"
     )
+
 
 engine = create_engine(DATABASE_URL, echo=False)
 SessionLocal = sessionmaker(bind=engine)
