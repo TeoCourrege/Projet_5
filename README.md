@@ -1,3 +1,16 @@
+---
+title: Employee Churn Prediction
+emoji: 🚀
+colorFrom: blue
+colorTo: purple
+sdk: gradio
+sdk_version: 4.44.0
+python_version: 3.11
+app_file: app.py
+pinned: false
+---
+
+
 # Employee Churn Prediction
 
 Application de Machine Learning pour prédire le départ d'un employé d'une entreprise.  
