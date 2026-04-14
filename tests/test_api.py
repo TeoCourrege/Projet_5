@@ -108,7 +108,7 @@ def test_predict_success():
         )
 
         assert result == 1
-
+#
 
 def test_predict_error():
     from src.db.database import predict
