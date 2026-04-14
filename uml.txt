@@ -31,7 +31,6 @@
 | - distance_domicile_travail: INT                 |
 | - niveau_education: INT                          |
 | - domaine_etude: VARCHAR(100)                    |
-| - ayant_enfants: BOOLEAN                         |
 | - frequence_deplacement: VARCHAR(50)             |
 | - annees_depuis_la_derniere_promotion: INT       |
 | - annes_sous_responsable_actuel: INT             |

@@ -70,3 +70,41 @@ def test_batch_predict_requires_id_column():
             assert "id" in result
     finally:
         os.unlink(tmp_path)
+
+def test_predict_success():
+    from src.db.database import predict
+
+    mock_pipeline = MagicMock()
+    mock_pipeline.predict.return_value = [1]
+    mock_pipeline.predict_proba.return_value = [[0.2, 0.8]]
+
+    with patch("src.db.database._get_pipeline", return_value=mock_pipeline), \
+         patch("src.db.database.SessionLocal") as mock_session:
+
+        session = MagicMock()
+        mock_session.return_value = session
+
+        result = predict(
+            employee_id=1, age=30, genre="M", revenu_mensuel=3000,
+            statut_marital="Célibataire", departement="IT", poste="Dev",
+            nombre_experiences_precedentes=2, nombre_heures_travailless=40,
+            annee_experience_totale=5, annees_dans_l_entreprise=2,
+            annees_dans_le_poste_actuel=1,
+            nombre_participation_pee=0, nb_formations_suivies=1,
+            nombre_employee_sous_responsabilite=0,
+            distance_domicile_travail=10, niveau_education=3,
+            domaine_etude="Info", frequence_deplacement="Rare",
+            annees_depuis_la_derniere_promotion=1,
+            annes_sous_responsable_actuel=0,
+            satisfaction_employee_environnement=3,
+            note_evaluation_precedente=3,
+            niveau_hierarchique_poste=2,
+            satisfaction_employee_nature_travail=3,
+            satisfaction_employee_equipe=3,
+            satisfaction_employee_equilibre_pro_perso=3,
+            note_evaluation_actuelle=3,
+            heure_supplementaires="Non",
+            augementation_salaire_precedente=5.0
+        )
+
+        assert result == 1
