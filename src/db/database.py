@@ -10,6 +10,7 @@ from sqlalchemy import (
 )
 from sqlalchemy.orm import declarative_base, sessionmaker, relationship
 from datetime import datetime
+import tempfile
 
 load_dotenv()
 
@@ -321,6 +322,30 @@ def batch_predict(file):
     except Exception as e:
         session.rollback()
         return pd.DataFrame([{"id": "ERROR", "prediction": "Format non supporté"}])
+    finally:
+        session.close()
+
+def export_outputs():
+    session = SessionLocal()
+    try:
+        rows = session.query(ModelOutput).all()
+
+        data = [{
+            "output_id": r.output_id,
+            "input_id": r.input_id,
+            "employee_id": r.employee_id,
+            "prediction": r.prediction,
+            "probability": r.probability,
+            "created_at": r.created_at,
+        } for r in rows]
+
+        df = pd.DataFrame(data)
+
+        tmp_file = tempfile.NamedTemporaryFile(delete=False, suffix=".csv")
+        df.to_csv(tmp_file.name, index=False)
+
+        return tmp_file.name
+
     finally:
         session.close()
 

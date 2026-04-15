@@ -1,10 +1,12 @@
 import gradio as gr
+import tempfile
 from src.db.database import (
     predict as db_predict,
     batch_predict,
     authenticate,
     init_db,
     seed_admin,
+    export_outputs
 )
 
 init_db()
@@ -125,6 +127,20 @@ with gr.Blocks(title="Prédiction départ employé") as demo:
             prediction_output = gr.Number(label="Prédiction (0=reste, 1=part)")
 
         predict_btn.click(fn=db_predict, inputs=inputs, outputs=prediction_output)
+
+        with gr.Tab("Téléchargement des outputs"):
+
+            gr.Markdown("### Télécharger les prédictions enregistrées")
+
+            download_btn = gr.Button("Exporter les outputs (CSV)", variant="primary")
+
+            file_output = gr.File(label="Fichier prêt au téléchargement")
+
+            download_btn.click(
+                fn=export_outputs,
+                inputs=[],
+                outputs=file_output
+            )
 
 # ==============================
 # RUN
