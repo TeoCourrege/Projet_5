@@ -16,6 +16,9 @@ pinned: false
 Application de Machine Learning pour prédire le départ d'un employé d'une entreprise.  
 Interface Gradio + pipeline scikit-learn + base PostgreSQL pour le logging des prédictions.
 
+Lien Github: https://github.com/TeoCourrege/Projet_5
+Lien Hugging Face Spaces: https://huggingface.co/spaces/TeoCourrege/Projet5
+(connexion : username: admin; mdp: admin)
 ---
 
 ## Table des matières
@@ -44,10 +47,13 @@ Projet_5/
 ├── data/
 │   ├── raw/                  # Données brutes (CSV sources)
 │   ├── processed/            # Données fusionnées (df_final.csv)
-│   └── test/                 # Données de test
+│   └── test/                 # Données de test (fusionnées)
 ├── sql/
 │   └── create_tables.sql     # Script SQL de création des tables
 ├── src/
+│   ├── api/
+│       ├── schemas.py        # Schema données pour pydantic tests
+│       └── validation.py     # Fonction de validation pour les tests
 │   ├── db/
 │   │   └── database.py       # ORM, auth, logging prédictions
 │   └── model/
@@ -57,7 +63,9 @@ Projet_5/
 ├── tests/
 │   ├── conftest.py           # Fixtures partagées
 │   ├── tests.py              # Tests du pipeline ML
-│   └── test_api.py           # Tests de l'application Gradio
+│   ├── test_api.py           # Tests de l'application Gradio
+│   ├── test_pydantic.py      # Tests pydantic
+│   └── test_integration_validation.py      # Tests integration
 └── uml.txt                   # Schéma des tables
 ```
 
@@ -276,7 +284,7 @@ Les utilisateurs sont stockés dans la table `users` de PostgreSQL.
 | **Template secrets**          | `.env.example` sans valeurs sensibles             |
 | **CI/CD secrets**             | GitHub Secrets (`HF_TOKEN`, etc.)                 |
 | **Accès DB**                  | Credentials via variables d'environnement         |
-| **Validation des inputs**     | Gradio valide les types via les composants UI     |
+| **Validation des inputs**     | Gradio + Pydantic                                 |
 
 ### Gestion des accès
 
