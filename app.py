@@ -30,6 +30,20 @@ with gr.Blocks(title="Prédiction départ employé") as demo:
             col_count=(2, "fixed"))
 
         batch_btn.click(fn=batch_predict, inputs=file_input, outputs=batch_output)
+    
+    with gr.Tab("Téléchargement des outputs"):
+
+            gr.Markdown("### Télécharger les prédictions enregistrées")
+
+            download_btn = gr.Button("Exporter les outputs (CSV)", variant="primary")
+
+            file_output = gr.File(label="Fichier prêt au téléchargement")
+
+            download_btn.click(
+                fn=export_outputs,
+                inputs=[],
+                outputs=file_output
+            )
 
     with gr.Tab("Prédiction manuelle"):
         with gr.Row():
@@ -128,19 +142,6 @@ with gr.Blocks(title="Prédiction départ employé") as demo:
 
         predict_btn.click(fn=db_predict, inputs=inputs, outputs=prediction_output)
 
-        with gr.Tab("Téléchargement des outputs"):
-
-            gr.Markdown("### Télécharger les prédictions enregistrées")
-
-            download_btn = gr.Button("Exporter les outputs (CSV)", variant="primary")
-
-            file_output = gr.File(label="Fichier prêt au téléchargement")
-
-            download_btn.click(
-                fn=export_outputs,
-                inputs=[],
-                outputs=file_output
-            )
 
 # ==============================
 # RUN
