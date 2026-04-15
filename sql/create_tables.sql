@@ -26,7 +26,6 @@ CREATE TABLE IF NOT EXISTS model_inputs (
     annee_experience_totale INT,
     annees_dans_l_entreprise INT,
     annees_dans_le_poste_actuel INT,
-    a_quitte_l_entreprise BOOLEAN,
     nombre_participation_pee INT,
     nb_formations_suivies INT,
     nombre_employee_sous_responsabilite INT,
