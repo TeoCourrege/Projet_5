@@ -119,24 +119,6 @@ class TestValidationIntegration:
             assert "Erreur de validation" in result
             assert "Experience cannot exceed age" in result
 
-    def test_predict_with_unrealistic_distance(self, valid_employee_dict):
-        """Test that predict rejects unrealistic distance."""
-        from src.db.database import predict
-
-        valid_employee_dict["distance_domicile_travail"] = 1500.0
-
-        with patch("src.db.database._get_pipeline"), \
-             patch("src.db.database.SessionLocal") as mock_session:
-
-            session = MagicMock()
-            mock_session.return_value = session
-
-            result = predict(**valid_employee_dict)
-
-            assert isinstance(result, str)
-            assert "Erreur de validation" in result
-            assert "Distance unrealistic" in result
-
     def test_predict_with_too_few_hours(self, valid_employee_dict):
         """Test that predict rejects too few working hours."""
         from src.db.database import predict

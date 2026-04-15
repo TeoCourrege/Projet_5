@@ -106,13 +106,6 @@ class EmployeeInput(BaseModel):
             raise ValueError("Experience cannot exceed age")
         return v
 
-    @field_validator("distance_domicile_travail")
-    @classmethod
-    def distance_reasonable(cls, v):
-        if v > 1000:
-            raise ValueError("Distance unrealistic")
-        return v
-
     @field_validator("nombre_heures_travailless")
     @classmethod
     def hours_check(cls, v):

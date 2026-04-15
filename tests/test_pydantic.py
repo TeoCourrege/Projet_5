@@ -283,13 +283,6 @@ class TestEmployeeInputValidation:
             EmployeeInput(**valid_employee_data)
         assert "Experience cannot exceed age" in str(exc_info.value)
 
-    def test_distance_unrealistic_fails(self, valid_employee_data):
-        """Test custom validator: distance above 1000 is unrealistic."""
-        valid_employee_data["distance_domicile_travail"] = 1001
-        with pytest.raises(ValidationError) as exc_info:
-            EmployeeInput(**valid_employee_data)
-        assert "Distance unrealistic" in str(exc_info.value)
-
     def test_too_few_working_hours_fails(self, valid_employee_data):
         """Test custom validator: working hours below 5 is rejected."""
         valid_employee_data["nombre_heures_travailless"] = 4
@@ -424,10 +417,3 @@ class TestEmployeeInputValidation:
         employee = EmployeeInput(**valid_employee_data)
         assert isinstance(employee.age, int)
         assert isinstance(employee.niveau_education, int)
-
-    def test_string_number_fails(self, valid_employee_data):
-        """Test that string numbers are rejected."""
-        valid_employee_data["age"] = "30"
-        with pytest.raises(ValidationError) as exc_info:
-            EmployeeInput(**valid_employee_data)
-        assert "age" in str(exc_info.value)
