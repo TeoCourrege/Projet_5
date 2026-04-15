@@ -52,8 +52,8 @@ Projet_5/
 │   └── create_tables.sql     # Script SQL de création des tables
 ├── src/
 │   ├── api/
-│       ├── schemas.py        # Schema données pour pydantic tests
-│       └── validation.py     # Fonction de validation pour les tests
+│   │   ├── schemas.py        # Schema données pour pydantic tests
+│   │   └── validation.py     # Fonction de validation pour les tests
 │   ├── db/
 │   │   └── database.py       # ORM, auth, logging prédictions
 │   └── model/
